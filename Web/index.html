@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MaxCore Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="logo.png" class="logo" alt="Logo">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="https://discord.gg/X9rGuZpm" target="_blank">Community</a></li>
+                <li><a href="#info">Information</a></li>
+                <li><a href="#news">News</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h1>Welcome</h1>
+            <div class="typing-text" id="typingElement"></div>
+            <p>Follow MaxCore ID on Roblox!<br>Join the group to get the latest news and updates about the game.</p>
+            <div>
+                <a href="https://www.roblox.com/games/135103386398929/Troll-Tower-All-Weapon-NEW" class="button"><span></span>View Our Popular Game</a>
+                <a href="https://www.roblox.com/communities/742686109/MaxCore-Game-ID#!/about" class="button"><span></span>Join Max Core Game</a>
+                <a href="https://www.roblox.com/users/6209340332/profile" class="button"><span></span>Follow <strong>Yti_Omar</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-section" id="about">
+        <div class="section-title">About Us</div>
+        <p>
+            Max Core Game is one of the groups on Roblox that provides games. But Max Core Game is still a small and new group on Roblox and is not yet popular. We will likely provide many tower obby type games.<br><br>
+            The game owner of Max Core Game, namely Yti_Omar, started it in May 2025. The goal of our community is to create exciting games that can be played together. Max Core Game comes from East Java, Indonesia. Currently, we have 1 game in development, and 1 more coming soon.<br><br>
+            We also have a Discord community — unfortunately, there are no members yet 😢. But we will try to provide the best for players. Admins/owners will be active in supervising games. If you meet hackers or toxic players, just report to us!<br><br>
+            We aim to develop friendly and fun games for all ages. Besides Roblox, we also develop games on Scratch. Check out our profile: "Ytiomar" or "Yti-omar" on Scratch!<br><br>
+            Thank you so much for your support! 💙
+        </p>
+    </div>
+
+    <div class="News-section" id="news">
+        <div class="section-title">News</div>
+        <p>
+            Our Game <strong>Troll Tower All Weapon</strong> has just been updated! and <strong>Tower Letter A</strong> will release on July. Did you know?, there is so many short cut in my game, can u find it?, and our game 
+            <strong>Troll Tower All Weapon</strong> has been played by more than 600 players!, pls help us to reach 1000 player!, Thanks For The donation, this is usn of ppl donating for my game : <strong>Josh_Staff11 | 150 Robux, izabela2014_G | 120 Robux, 911wwy | 70 Robux, timothy1498_boi | 50 Robux, Lolllllo30 | 15 Robux, Yuna_lid | 10 Robux, RF82416 | 5 Robux. </strong>TYSM FOR YOUR DONATION<br><br>
+            Thank you for playing and supporting us! 🎉
+        </p>
+    </div>
+
+    <div class="Donated-section">
+        <div class="section-title">Robux Donated:</div>
+        <div id="donationCount" class="donation-number">0</div>
+        <div class="donation-text">Just DONATED! Wanna donate us too? Go to our game and donate! 🎉</div>
+    </div>
+
+    <div class="Visit-section" id="info">
+        <div class="section-title">Player Visits:</div>
+        <div id="visitCount" class="visit-number">0</div>
+        <div class="visit-text">Thanks for helping us reach this number! 🎮</div>
+    </div>
+
+    <script>
+        // Typing animation
+        const messages = [
+            "Hello!, welcome to our community!",
+            "Follow Yti_Omar For more Information!",
+            "Help us to reach 1000 Visits!",
+            "Join MaxCore Group For more rewards!",
+            "Our game is still in development",
+            "Wanna support us? Donate some Robux in our game!",
+            "There is a secret in our game, can you find it?",
+            "We are working hard to make the game better!",
+            "Thank you for your support!",
+            "Tips: Invite your friends to play with you!",
+            "Stay tuned for more updates!",
+            "We appreciate your feedback!",
+            "If you like the game, please like and favorite it!",
+            "You will get secret rewards from admin/owner if you made our game popular!"
+        ];
+        const typingElement = document.getElementById('typingElement');
+        let msgIdx = 0, charIdx = 0, deleting = false, pause = false;
+
+        function type() {
+            const msg = messages[msgIdx];
+            if (pause) {
+                setTimeout(() => {
+                    pause = false;
+                    deleting = true;
+                    type();
+                }, 3000); return;
+            }
+
+            if (deleting) {
+                typingElement.innerHTML = msg.substring(0, --charIdx) + "<span></span>";
+                if (charIdx === 0) {
+                    deleting = false;
+                    msgIdx = (msgIdx + 1) % messages.length;
+                }
+            } else {
+                typingElement.innerHTML = msg.substring(0, ++charIdx) + "<span></span>";
+                if (charIdx === msg.length) pause = true;
+            }
+            setTimeout(type, deleting ? 40 : 50);
+        }
+
+        setTimeout(type, 1000);
+
+        // Counter
+        function animateCountUp(el, target, duration) {
+            let start = 0;
+            const step = target / (duration / 2);
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    el.textContent = Math.floor(target).toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(start).toLocaleString();
+                }
+            }, 20);
+        }
+
+        const donationEl = document.getElementById("donationCount");
+        const visitEl = document.getElementById("visitCount");
+        let donationShown = false, visitShown = false;
+
+        function checkView(el) {
+            const r = el.getBoundingClientRect();
+            return r.top < window.innerHeight && r.bottom > 0;
+        }
+
+        function checkScroll() {
+            if (!donationShown && checkView(donationEl)) {
+                animateCountUp(donationEl, 1790, 2000);
+                donationShown = true;
+            }
+            if (!visitShown && checkView(visitEl)) {
+                animateCountUp(visitEl, 783, 2000);
+                visitShown = true;
+            }
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+    </script>
+</body>
+</html>
